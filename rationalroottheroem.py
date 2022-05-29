@@ -1,9 +1,7 @@
 #Este programita surgió de la necesidad de agilizar la evaluación de los posibles ceros de polinomios obtenidos usando el Teorema de Raices Racionales. En lugar de calcular cada posible raiz a digitación, se ingresa el polinomio y este devuelve las posibles raices, pero tambien evalua cada una de ellas localizando todos los ceros. Al evaluar para todas las posibles raices se puede obtener un analisis de la tendencia de la funcion y obtener una gráfica aproximada sin tener que hacer tablas. Mil disculpas por el Spanglish.
 
 import sympy
-from libff import Factors
 from fractions import Fraction
-
 
 print("\nCEROS DE POLINOMIOS SEGÚN EL TEOREMA DE RAICES RACIONALES\n")
 
@@ -30,8 +28,8 @@ while True:
 				asubn = input("\nIngresá el coeficiente entero a" + str(coefficient)+ "	")
 				values_coefficients.append(asubn)
 				
-			p = values_coefficients[int(degree)]				
-			q = values_coefficients[0]
+			p = int(values_coefficients[int(degree)])			
+			q = int(values_coefficients[0])
 
 			#Building the function:
 
@@ -58,52 +56,34 @@ while True:
 			#Calculating factors of leading and independent coefficients using libff; had to add some additional input since libff didn't give output for factors 0, 1, 2, 3:
 	 
 			print("\nFactores de p: \n")
-
-			P = []
-
-			if abs(int(p)) == 1:
-				P.append(1)
-				print(P)
-						
-			elif abs(int(p)) == 2:
-				P.extend((1,2))
-				print(P)
-						
-			elif abs(int(p)) == 3:
-				P.extend((1,3))
-				print(P)
 			
-			elif abs(int(p)) == 0:
+			P = []
+			
+			if p == 0:
 				print("-Cero no tiene factores-")	
 				
 			else:
-				factors_p = Factors(abs(int(p)))
-				P = factors_p.all_factors()
-				print(P)
+				
+				for i in range(1, abs(p) + 1):
+					if abs(p) % i == 0:
+						P.append(i)
+			print(P)
+
 
 			print("\nFactores de q: \n")
 
 			Q = []
-
-			if abs(int(q)) == 1:
-				Q.append(1)
-				print(Q)
-						
-			elif abs(int(q)) == 2:
-				Q.extend((1,2))
-				print(Q)
-						
-			elif abs(int(q)) == 3:
-				Q.extend((1,3))
-				print(Q)
 				
-			elif abs(int(q)) == 0:
+			if q == 0:
 				print("-Cero no tiene factores-")	
 				
 			else:
-				factors_q = Factors(abs(int(q)))
-				Q = factors_q.all_factors()
-				print(Q)
+				
+				for i in range(1, abs(q) + 1):
+					if abs(q) % i == 0:
+						Q.append(i)
+			
+			print(Q)
 
 			values = []
 			
